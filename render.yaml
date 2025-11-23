@@ -1,0 +1,25 @@
+services:
+  # Backend API
+  - type: web
+    name: dots-decimals-backend
+    env: node
+    region: oregon
+    buildCommand: cd backend && npm install
+    startCommand: cd backend && npm start
+    envVars:
+      - key: NODE_ENV
+        value: production
+      - key: DATABASE_URL
+        sync: false
+      - key: JWT_SECRET
+        sync: false
+      - key: PORT
+        value: 10000
+
+  # Frontend (if you want to deploy it separately)
+  - type: web
+    name: dots-decimals-frontend
+    env: static
+    region: oregon
+    buildCommand: cd frontend-new && npm install && npm run build
+    staticPublishPath: ./frontend-new/dist
