@@ -38,7 +38,8 @@ app.use(
       "https://dot-decimals-1.onrender.com",
       "https://dot-decimals-admin.onrender.com",
       "https://dots-and-decimals-render-2.onrender.com",
-      "https://dots-and-decimals-render-3.onrender.com"
+      "https://dots-and-decimals-render-3.onrender.com",
+      "https://www.dotsndecimalsinfotech.com"
     ],
     credentials: true,
     methods: ["GET", "POST", "PUT", "DELETE", "PATCH", "OPTIONS"],
