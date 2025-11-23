@@ -37,6 +37,8 @@ app.use(
       "https://*.onrender.com",
       "https://dot-decimals-1.onrender.com",
       "https://dot-decimals-admin.onrender.com",
+      "https://dots-and-decimals-render-2.onrender.com",
+      "https://dots-and-decimals-render-3.onrender.com"
     ],
     credentials: true,
     methods: ["GET", "POST", "PUT", "DELETE", "PATCH", "OPTIONS"],
@@ -71,7 +73,7 @@ app.get("/health", (req, res) => {
 app.use("/api/auth", authRoutes);
 app.use("/api/products", productRoutes);
 app.use("/api/orders", orderRoutes);
-app.use("/api/cart", cartRoutes); 
+app.use("/api/cart", cartRoutes);
 app.use("/api/profile/addresses", profileRoutes);
 app.use("/api/profile", profileRoutes);
 
