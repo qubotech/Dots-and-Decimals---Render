@@ -78,7 +78,7 @@ export const companyDetails = {
   threads: "https://threads.net/yourpage",
   instagram: "https://instagram.com/yourpage",
   x: "https://twitter.com/yourpage",
-
+  whatsapp: "https://wa.me/919003635437",
 };
 
 // website routes
@@ -95,7 +95,7 @@ export const routes = [
   },
   {
     name: "Products",
-    path:"/products",
+    path: "/products",
     component: <ProductList />,
   },
   {
@@ -108,7 +108,7 @@ export const routes = [
     path: "/contact-us",
     component: <ContactUs />,
   },
-   {
+  {
     name: "Login / Signup", // ✅ Add new route name
     path: "/auth", // ✅ route path
     component: <AuthPage />, // ✅ your AuthPage component
@@ -129,7 +129,7 @@ export const QuickLinks = [
   },
   {
     name: "Products",
-    path:"/products",
+    path: "/products",
     component: <ProductList />,
   },
   {
@@ -142,12 +142,12 @@ export const QuickLinks = [
     path: "/contact-us",
     component: <ContactUs />,
   },
-    {
+  {
     name: "Privacy Policy",
     path: "/privacy-policy",
     component: <PrivacyPolicy />,
   },
-   {
+  {
     name: "Login / Signup", // ✅ Add new route name
     path: "/auth", // ✅ route path
     component: <AuthPage />, // ✅ your AuthPage component
