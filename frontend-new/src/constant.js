@@ -73,11 +73,11 @@ export const companyDetails = {
   tel: "+919003635437", // Ensure this value is defined and correct
   email: "dotsndecimalsinfotech@gmail.com",
   address: "S.F.NO758/2 759/2A, SITE No.86,87, Kovai Thiru Nagar, CBE, Civil Aerodrome Post, Kalapatti, Coimbatore, Tamil Nadu - 641014",
-  facebook: "https://facebook.com/yourpage",
-  linkedin: "https://linkedin.com/yourpage",
-  threads: "https://threads.net/yourpage",
-  instagram: "https://instagram.com/yourpage",
-  x: "https://twitter.com/yourpage",
+  facebook: "https://www.facebook.com/people/Dotsdecimals-infotech/61582304906895/?rdid=yY4cd24kYFUVoXQv&share_url=https%3A%2F%2Fwww.facebook.com%2Fshare%2F17iErDkJvW%2F",
+  linkedin: "https://www.linkedin.com/company/dots-decimalsinfotech/",
+  threads: "https://www.threads.com/@dotsndecimalsinfotech",
+  instagram: "https://www.instagram.com/dotsndecimalsinfotech/?igsh=MWdmZXc3NGxkMDI1OQ%3D%3D#",
+  x: "https://x.com/dotsndecimals?t=YSQaXxi00HsOGI3E4hGNBQ&s=09",
   whatsapp: "https://wa.me/919003635437",
 };
 

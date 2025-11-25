@@ -92,7 +92,7 @@ const WebsiteFooter = () => {
               </Link>
             </div>
           </div>
-          <div className="mt-5 text-center  text-sm flex flex-col">
+          <div className="mt-3 md:mt-5 text-center text-sm flex flex-col gap-2">
             {/* First div for copyright */}
             <div>
               <p className="text-white">© 2025 dots&decimals infotech. All rights reserved.</p>
@@ -100,7 +100,7 @@ const WebsiteFooter = () => {
 
             {/* Second div for recognition */}
             <div>
-              <p className="text-base md:text-[16px]">
+              <p className="text-xs md:text-sm lg:text-base text-white/90">
                 Recognized by the Government of India under DPIIT
               </p>
             </div>

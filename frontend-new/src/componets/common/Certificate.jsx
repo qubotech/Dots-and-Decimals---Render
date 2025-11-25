@@ -20,42 +20,42 @@ export default function Certificate() {
       </a> */}
 
       {/* Hero Section */}
-      <div className="flex flex-col items-center justify-center min-h-screen px-4 py-12">
+      <div className="flex flex-col items-center justify-center px-4 py-8 md:py-16 lg:py-20">
         {/* Award Icon */}
         <img
           src={badge}
           alt="Award"
-          className="w-24 h-24 object-contain"
+          className="w-16 h-16 md:w-20 md:h-20 lg:w-24 lg:h-24 object-contain mb-4 md:mb-6"
         />
 
         {/* Main Heading */}
-        <h1 className="text-4xl md:text-6xl lg:text-7xl font-semibold text-center mb-6 leading-tight 
+        <h1 className="text-2xl md:text-4xl lg:text-6xl font-semibold text-center mb-3 md:mb-5 leading-tight 
   bg-gradient-to-r from-[#EDCC5B] to-[#F1b223] text-transparent bg-clip-text 
-  max-w-6xl mx-auto">
+  max-w-6xl mx-auto px-2">
           Recognized by the Government of India under DPIIT
         </h1>
 
         {/* Subheading */}
-        <p className="text-lg md:text-xl text-gray-300 text-center mb-6 max-w-2xl">
+        <p className="text-sm md:text-lg lg:text-xl text-gray-300 text-center mb-4 md:mb-6 max-w-2xl px-4">
           Officially recognized by Startup India - Department for Promotion of Industry and Internal Trade
         </p>
 
         {/* Verified Badge */}
-        <div className="flex items-center gap-2 text-[#EBD36B]">
+        <div className="flex items-center gap-2 text-[#EBD36B] mb-6 md:mb-8">
           <img
             src={verified}
             alt="check"
-            className="w-8 h-8 object-contain"
+            className="w-6 h-6 md:w-8 md:h-8 object-contain"
           />
-          <span className="text-lg font-semibold">Verified & Active</span>
+          <span className="text-base md:text-lg font-semibold">Verified & Active</span>
         </div>
       </div>
 
       {/* Certificate Section */}
-      <div className="bg-gradient-to-br from-slate-800 via-slate-900 to-slate-800 py-8 px-8 w-[95%] mx-auto rounded-3xl border-2 border-[#585741]">
+      <div className="bg-gradient-to-br from-slate-800 via-slate-900 to-slate-800 py-4 md:py-6 lg:py-8 px-4 md:px-8 w-[95%] mx-auto rounded-3xl border-2 border-[#585741] mb-8 md:mb-12">
         <div className="max-w-7xl mx-auto">
           {/* Certificate Container */}
-          <div className="bg-[#17202E] p-8 md:p-12 sm:p-0.5 border-2 border-dashed border-[#585741] shadow-2xl rounded-2xl">      
+          <div className="bg-[#17202E] p-2 md:p-8 lg:p-12 border-2 border-dashed border-[#585741] shadow-2xl rounded-2xl">
             <div
               className="rounded-xl overflow-hidden shadow-2xl md:cursor-default cursor-pointer"
               onClick={() => setIsModalOpen(true)}
