@@ -20,7 +20,7 @@ const LandingServices = ({ page }) => {
           {service.title}
         </div>
 
-        <h1 data-aos="fade-up" className="heading-2 text-center max-w-3xl">
+        <h1 data-aos="fade-up" className="heading-2 text-center max-w-3xl mx-auto px-4">
           {/* {page === "web-development"
             ? "Transform Your Digital Presence With Cutting-Edge Web Solutions"
             : "Powerful Mobile Experiences That Drive Engagement And Growth"} */}
@@ -29,7 +29,7 @@ const LandingServices = ({ page }) => {
 
         <p
           data-aos="fade-up"
-          className="text-center max-w-2xl desc text-white/80"
+          className="text-center max-w-2xl mx-auto desc text-white/80 px-4"
         >
           {/* {page === "web-development"
             ? "We craft high-performance websites that combine stunning design with robust functionality to elevate your brand and drive conversions."
@@ -39,24 +39,23 @@ const LandingServices = ({ page }) => {
 
         <div
           data-aos="fade-up"
-          className={`grid grid-cols-1 sm:grid-cols-2 gap-6 sm:gap-8 py-8 mx-auto w-full max-w-6xl`}
+          className={`grid grid-cols-1 sm:grid-cols-2 gap-6 sm:gap-8 py-8 w-full max-w-6xl mx-auto`}
         >
           {service.services.map((item) => (
             <div
               key={item.id}
-              className={`shadow-2xl transition-all border-2 border-primary/50 bg-primary/20 hover:-translate-y-1 hover:bg-primary/25 duration-300 rounded-xl
-                ${
-                  isOddCount && item.id === lastItem.id
-                    ? "sm:col-span-2 max-w-2xl mx-auto"
-                    : ""
+              className={`shadow-2xl transition-all will-change-transform border-2 border-primary/50 bg-primary/20 hover:-translate-y-2 hover:shadow-primary/30 hover:bg-primary/25 duration-300 ease-out rounded-xl
+                ${isOddCount && item.id === lastItem.id
+                  ? "sm:col-span-2 max-w-2xl mx-auto w-full"
+                  : ""
                 }`}
             >
-              <div className="flex h-full flex-col gap-3 items-center text-center p-8 rounded-xl">
-                <item.icon className="w-16 h-16 fill-primary" />
-                <h6 className="font-bold text-2xl font-raleway mt-2">
+              <div className="flex h-full flex-col gap-3 items-center justify-start text-center p-6 sm:p-8 rounded-xl">
+                <item.icon className="w-14 h-14 sm:w-16 sm:h-16 fill-primary flex-shrink-0" />
+                <h6 className="font-bold text-xl sm:text-2xl font-raleway mt-2">
                   {item.title}
                 </h6>
-                <p className="text-md text-white/80 leading-relaxed">
+                <p className="text-sm sm:text-md text-white/80 leading-relaxed">
                   {item.description}
                 </p>
               </div>

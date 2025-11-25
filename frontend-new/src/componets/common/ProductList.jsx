@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from "react";
+import React, { useState, useEffect, useMemo, useCallback } from "react";
 import Banner from "../website/Banner";
 import Drawer from "react-modern-drawer";
 import { IoMdClose } from "react-icons/io";
@@ -6,6 +6,52 @@ import { API } from "../../api";
 import { useNavigate } from "react-router-dom";
 import { Toaster, toast } from "react-hot-toast";
 import Kaspersky_plus from "../../assets/images/kaspersky-plus.png";
+
+// Product cache to avoid redundant API calls
+let productCache = null;
+let cacheTimestamp = null;
+const CACHE_DURATION = 5 * 60 * 1000; // 5 minutes
+
+// Memoized Product Card Component - Optimized for speed
+const ProductCard = React.memo(({ product, index, onViewDetails }) => (
+    <div
+        className="rounded-lg p-[1px] bg-gradient-to-r from-secondary to-primary cursor-pointer transform transition-all duration-200 ease-out hover:scale-105"
+    >
+        <div className="rounded-lg bg-[#101010] hover:bg-black/70 transition-colors duration-200 p-5 flex flex-col justify-between items-center text-center h-full gap-4">
+            <div className="flex justify-center">
+                <img
+                    src={product.image}
+                    alt={product.name}
+                    className="w-32 h-32 object-contain transition-transform duration-200 hover:scale-105"
+                    loading="lazy"
+                    decoding="async"
+                    fetchpriority={index < 3 ? "high" : "low"}
+                />
+            </div>
+            <div className="flex flex-col gap-2">
+                <h5 className="font-semibold text-xl">{product.name}</h5>
+                <p className="desc text-white/80 line-clamp-2">
+                    {product.description}
+                </p>
+                {product.price && (
+                    <p className="text-lg font-semibold text-primary">
+                        ₹{product.price}
+                    </p>
+                )}
+            </div>
+            <div className="flex gap-2 mt-2">
+                <button
+                    onClick={() => onViewDetails(product.id)}
+                    className="bg-gradient-to-r from-purple-600 to-purple-700 text-white px-4 py-2 rounded-lg hover:from-purple-700 hover:to-purple-800 transition-all duration-200 shadow-lg hover:shadow-purple-500/50"
+                >
+                    View Details
+                </button>
+            </div>
+        </div>
+    </div>
+));
+
+ProductCard.displayName = 'ProductCard';
 
 const ProductList = () => {
     const [isOpen, setIsOpen] = useState(false);
@@ -22,7 +68,26 @@ const ProductList = () => {
     const fetchProducts = async () => {
         try {
             setLoading(true);
-            const res = await API.get("/products");
+
+            // Check cache first
+            const now = Date.now();
+            if (productCache && cacheTimestamp && (now - cacheTimestamp) < CACHE_DURATION) {
+                console.log('Using cached products');
+                setProducts(productCache);
+                setLoading(false);
+                return;
+            }
+
+            // Add timeout to prevent hanging
+            const controller = new AbortController();
+            const timeoutId = setTimeout(() => controller.abort(), 10000); // 10 second timeout
+
+            const res = await API.get("/products", {
+                signal: controller.signal,
+                timeout: 10000
+            });
+
+            clearTimeout(timeoutId);
 
             if (res.data && res.data.length > 0) {
                 const formattedProducts = res.data.map((product) => ({
@@ -33,19 +98,34 @@ const ProductList = () => {
                     detailContent: product.description,
                     price: product.price,
                 }));
+
+                // Cache the products
+                productCache = formattedProducts;
+                cacheTimestamp = Date.now();
+
                 setProducts(formattedProducts);
+            } else {
+                setProducts([]);
             }
         } catch (error) {
             console.error("Error fetching products:", error);
+            if (error.name === 'AbortError') {
+                toast.error('Request timed out. Please check your connection.');
+            } else if (error.code === 'ECONNABORTED') {
+                toast.error('Connection timeout. Please try again.');
+            } else {
+                toast.error('Failed to load products. Please refresh.');
+            }
+            setProducts([]);
         } finally {
             setLoading(false);
         }
     };
 
-    // ✅ Updated: Remove login check here
-    const handleViewDetails = (productId) => {
+    // ✅ FIXED: Removed spaces from navigation path
+    const handleViewDetails = useCallback((productId) => {
         navigate(`/product/${productId}`);
-    };
+    }, [navigate]);
 
     if (loading) {
         return (
@@ -98,42 +178,12 @@ const ProductList = () => {
                     ) : (
                         <div className="grid sm:grid-cols-2 md:grid-cols-3 gap-5 mt-8 w-full">
                             {products.map((product, index) => (
-                                <div
+                                <ProductCard
                                     key={product.id}
-                                    data-aos={index % 2 === 0 ? "fade-up" : "fade-left"}
-                                    data-aos-duration="800"
-                                    className="rounded-lg p-[1px] bg-gradient-to-r from-secondary to-primary cursor-pointer"
-                                >
-                                    <div className="rounded-lg bg-[#101010] hover:bg-black/70 transition-all duration-300 p-5 flex flex-col justify-between items-center text-center h-full gap-4">
-                                        <div className="flex justify-center">
-                                            <img
-                                                src={product.image}
-                                                alt={product.name}
-                                                className="w-32 h-32 object-contain transition duration-300 hover:scale-105"
-                                                loading="lazy"
-                                            />
-                                        </div>
-                                        <div className="flex flex-col gap-2">
-                                            <h5 className="font-semibold text-xl">{product.name}</h5>
-                                            <p className="desc text-white/80 line-clamp-1">
-                                                {product.description}
-                                            </p>
-                                            {product.price && (
-                                                <p className="text-lg font-semibold text-primary">
-                                                    ₹{product.price}
-                                                </p>
-                                            )}
-                                        </div>
-                                        <div className="flex gap-2 mt-2">
-                                            <button
-                                                onClick={() => handleViewDetails(product.id)}
-                                                className="bg-purple-600 text-white px-3 py-1 rounded hover:bg-purple-700 transition"
-                                            >
-                                                View Details
-                                            </button>
-                                        </div>
-                                    </div>
-                                </div>
+                                    product={product}
+                                    index={index}
+                                    onViewDetails={handleViewDetails}
+                                />
                             ))}
                         </div>
                     )}

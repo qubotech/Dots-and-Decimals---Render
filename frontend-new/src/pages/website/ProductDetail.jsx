@@ -38,7 +38,7 @@ const ProductDetail = () => {
       setTimeout(() => {
         navigate("/auth");
       }, 1500);
-      
+
       return false; // Return false to indicate not logged in
     }
 
@@ -52,7 +52,7 @@ const ProductDetail = () => {
 
       // Update cart count in header
       window.dispatchEvent(new CustomEvent("cartUpdated"));
-      
+
       navigate("/cart"); // Optional: go to cart
       return true; // Return true to indicate success
     } catch (error) {
@@ -71,7 +71,7 @@ const ProductDetail = () => {
       setTimeout(() => {
         navigate("/auth");
       }, 1500);
-      
+
       return;
     }
 
@@ -89,8 +89,28 @@ const ProductDetail = () => {
 
   if (!product) {
     return (
-      <div className="p-10 text-center text-white text-xl bg-[#101010] min-h-screen">
-        Loading Product Details...
+      <div className="bg-[#0f0f0f] mt-20 text-white min-h-screen py-16 px-4 sm:px-6 flex justify-center items-center">
+        <div className="max-w-7xl w-full grid grid-cols-1 md:grid-cols-2 gap-12 md:gap-20">
+          {/* Skeleton Loader - LEFT SIDE */}
+          <div className="flex justify-center items-center bg-white/5 rounded-2xl p-6 md:p-8 backdrop-blur-md shadow-lg h-[380px] sm:h-[420px] md:h-[450px] lg:h-[500px] animate-pulse">
+            <div className="bg-gray-700 rounded-xl w-full max-w-sm sm:max-w-md h-full"></div>
+          </div>
+
+          {/* Skeleton Loader - RIGHT SIDE */}
+          <div className="rounded-2xl p-6 md:p-10 flex flex-col justify-between shadow-lg bg-white/5 backdrop-blur-md animate-pulse">
+            <div className="space-y-4">
+              <div className="bg-gray-700 h-10 w-3/4 rounded"></div>
+              <div className="bg-gray-700 h-8 w-1/2 rounded"></div>
+              <div className="bg-gray-700 h-6 w-1/3 rounded mt-4"></div>
+              <div className="space-y-2 mt-4">
+                <div className="bg-gray-700 h-4 w-full rounded"></div>
+                <div className="bg-gray-700 h-4 w-full rounded"></div>
+                <div className="bg-gray-700 h-4 w-3/4 rounded"></div>
+              </div>
+              <div className="bg-gray-700 h-12 w-full rounded mt-6"></div>
+            </div>
+          </div>
+        </div>
       </div>
     );
   }
@@ -103,7 +123,9 @@ const ProductDetail = () => {
           <img
             src={product.image}
             alt={product.name}
-            className="rounded-xl w-full max-w-sm sm:max-w-md object-contain hover:scale-105 transition-transform duration-300"
+            loading="eager"
+            decoding="async"
+            className="rounded-xl w-full max-w-sm sm:max-w-md object-contain hover:scale-105 transition-transform duration-300 ease-out will-change-transform"
           />
         </div>
 
@@ -140,7 +162,7 @@ const ProductDetail = () => {
             <button
               onClick={async () => {
                 const token = localStorage.getItem("token");
-                
+
                 // 🔒 Check if user is logged in FIRST
                 if (!token) {
                   toast.error("Please login or signup to continue!", {
@@ -153,7 +175,7 @@ const ProductDetail = () => {
 
                 // Call the add to cart function
                 const result = await handleAddToCart();
-                
+
                 // Show appropriate toast based on result
                 if (result === true) {
                   toast.success("Item added to cart!", {
@@ -169,11 +191,11 @@ const ProductDetail = () => {
                 }
               }}
               disabled={loading}
-              className="w-full bg-gradient-to-r from-blue-600 to-blue-800 hover:from-blue-700 hover:to-blue-900 px-6 py-3 rounded-full font-semibold shadow-lg transition-transform duration-200 hover:scale-105 disabled:opacity-50 disabled:cursor-not-allowed"
+              className="w-full bg-gradient-to-r from-blue-600 to-blue-800 hover:from-blue-700 hover:to-blue-900 px-6 py-3 rounded-full font-semibold shadow-lg transition-all duration-300 ease-out hover:scale-105 hover:shadow-blue-500/50 disabled:opacity-50 disabled:cursor-not-allowed will-change-transform"
             >
               🛒 {loading ? "Adding..." : "Add to Cart"}
             </button>
-            
+
             {/* Buy Now Button - Uncomment if needed */}
             {/* <button
               onClick={async () => {
