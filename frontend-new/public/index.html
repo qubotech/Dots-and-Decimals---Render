@@ -18,7 +18,7 @@
     !function (f, b, e, v, n, t, s) {
       if (f.fbq) return; n = f.fbq = function () {
         n.callMethod ?
-        n.callMethod.apply(n, arguments) : n.queue.push(arguments)
+          n.callMethod.apply(n, arguments) : n.queue.push(arguments)
       };
       if (!f._fbq) f._fbq = n; n.push = n; n.loaded = !0; n.version = '2.0';
       n.queue = []; t = b.createElement(e); t.async = !0;
@@ -32,6 +32,14 @@
   <!-- End Meta Pixel Code -->
 
   <meta charset="utf-8" />
+
+  <!-- Preconnect to external resources for faster loading -->
+  <link rel="preconnect" href="https://www.googletagmanager.com">
+  <link rel="preconnect" href="https://connect.facebook.net">
+  <link rel="preconnect" href="https://checkout.razorpay.com">
+  <link rel="dns-prefetch" href="https://fonts.googleapis.com">
+
+  <!-- Optimized favicon -->
   <link rel="icon" href="%PUBLIC_URL%/logo.png" />
   <meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no, maximum-scale=1" />
   <meta name="theme-color" content="#000000" />
@@ -39,7 +47,9 @@
   <link rel="apple-touch-icon" href="%PUBLIC_URL%/logo.png" />
   <link rel="manifest" href="%PUBLIC_URL%/manifest.json" />
   <title>Dots&Decimals Infotech</title>
-  <script src="https://checkout.razorpay.com/v1/checkout.js"></script>
+
+  <!-- Defer Razorpay to not block rendering -->
+  <script src="https://checkout.razorpay.com/v1/checkout.js" defer></script>
 
 </head>
 

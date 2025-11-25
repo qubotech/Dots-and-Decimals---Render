@@ -84,15 +84,16 @@ const Home = () => {
             <img
               src={aboutUsImg}
               className="object-contain max-h-[30rem]"
-              alt=""
+              alt="About Dots&Decimals Infotech"
+              loading="lazy"
             />
           </div>
         </div>
       </section>
-      
+
       {/* Certificate Component - Added here */}
       <Certificate />
-      
+
       <OurServices length={3} />
       <section className="py-[5rem] bg-black text-white">
         <div
