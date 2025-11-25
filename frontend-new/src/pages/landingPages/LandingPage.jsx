@@ -30,7 +30,7 @@ export const LandingPage = ({ page }) => {
 
   return (
     <>
-  
+
       <div id="banner" className="min-h-screen relative mt-10">
         <img
           src={selectedService?.bannerImg}
@@ -40,24 +40,16 @@ export const LandingPage = ({ page }) => {
         <div className="bg-gradient-to-r from-black/70 to-primary/60 absolute w-full h-full"></div>
         <div
           data-aos="fade-up"
-          className="min-h-screen pt-[8rem] pb-[4rem] sm:py-[3rem] wrapper flex items-center"
+          className="min-h-screen pt-[6rem] md:pt-[8rem] pb-[4rem] sm:py-[3rem] wrapper flex items-center"
         >
-          <div className="relative sm:translate-y-[3rem] z-10 px-6 justify-center h-full flex flex-col items-center gap-5 text-center md:max-w-[60rem] mx-auto">
-            <div className="rounded-text-box border-white/70 font-medium text-white">
-              {/* {isWebDevelopment ? "Web Development" : "App Development"} */}
+          <div className="relative sm:translate-y-[3rem] z-10 px-4 md:px-6 justify-center h-full flex flex-col items-center gap-4 md:gap-5 text-center md:max-w-[60rem] mx-auto">
+            <div className="rounded-text-box border-white/70 font-medium text-white text-sm md:text-base">
               {selectedService?.title}
             </div>
-            <h1 className="heading-1 text-white">
-              {/* {isWebDevelopment
-                ? "Transforming Ideas into Seamless Web Experiences"
-                : "Creating Seamless App Experiences for a Digital World"} */}{" "}
-              {selectedService?.title}
+            <h1 className="heading-1 text-white px-2">
               {selectedService?.bannerHeading}
             </h1>
-            <p className="text-white desc">
-              {/* {isWebDevelopment
-                ? "High-performance web development services designed to create secure, scalable, and user-friendly websites that enhance your business's digital presence."
-                : "High-performance app development services designed to deliver secure, scalable, and user-friendly applications that elevate your business's digital reach and engage your audience."} */}
+            <p className="text-white desc px-2">
               {selectedService?.bannerDesc}
             </p>
             <ScrollLink
