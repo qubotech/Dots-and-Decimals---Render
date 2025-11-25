@@ -61,7 +61,7 @@ const WebsiteHeader = () => {
     localStorage.removeItem("userId");
     localStorage.removeItem("userName")
     setIsLoggedIn(false);
-    setCartCount(0); 
+    setCartCount(0);
     setShowProfileMenu(false);
     navigate("/");
 
@@ -193,25 +193,30 @@ const WebsiteHeader = () => {
       <Drawer
         open={isOpen}
         onClose={toggleDrawer}
-        direction="left" // ✅ Drawer opens from left
-        className="fixed top-0 left-0 h-full w-64 bg-gray-900 text-white z-50 flex flex-col transition-transform duration-300"
+        direction="left"
+        className="fixed top-0 left-0 h-full w-72 z-50"
         style={{
-          transformOrigin: "left",
-          backdropFilter: "blur(10px)",
+          background: "linear-gradient(135deg, rgba(20, 20, 20, 0.98), rgba(40, 40, 40, 0.95))",
+          backdropFilter: "blur(20px)",
+          borderRight: "1px solid rgba(255, 255, 255, 0.1)",
         }}
       >
-        {/* Close button on the right */}
-        <div className="flex items-center justify-end px-4 py-4 border-b border-white/10">
+        {/* Header with Logo and Close Button */}
+        <div className="flex items-center justify-between px-6 py-5 border-b border-white/10"
+          style={{
+            background: "linear-gradient(135deg, rgba(237, 204, 91, 0.1), rgba(241, 178, 35, 0.05))",
+          }}>
+          <img src={logoImg1} className="w-12 h-12" alt="logo" />
           <button
             onClick={() => setIsOpen(false)}
-            className="text-white text-[1.5rem] hover:opacity-70 transition-opacity"
+            className="text-white text-2xl hover:text-primary transition-all duration-300 hover:rotate-90"
           >
             <IoMdClose />
           </button>
         </div>
 
-        {/* Mobile Links aligned to left */}
-        <div className="flex flex-col px-4 py-6 gap-4 items-center ">
+        {/* Navigation Links */}
+        <div className="flex flex-col px-6 py-6 gap-1 overflow-y-auto flex-1">
           {routes
             .filter((r) => r.name !== "Login / Signup")
             .map(({ name, path }) => (
@@ -219,48 +224,84 @@ const WebsiteHeader = () => {
                 to={path}
                 key={path}
                 onClick={() => setIsOpen(false)}
-                className={`text-lg text-white ${pathname === path ? "font-bold" : "hover:text-blue-400"}`}
+                className={`text-base py-3 px-4 rounded-lg transition-all duration-300 ${pathname === path
+                    ? "bg-gradient-to-r from-primary/20 to-secondary/20 text-primary font-semibold border-l-4 border-primary"
+                    : "text-white/80 hover:bg-white/5 hover:text-white hover:pl-6"
+                  }`}
               >
                 {name}
               </Link>
             ))}
 
+          {/* Cart Button */}
           <button
-            onClick={() => { navigate("/cart"); setIsOpen(false); }}
-            className="text-lg text-white relative"
+            onClick={() => {
+              navigate("/cart");
+              setIsOpen(false);
+            }}
+            className="text-base py-3 px-4 rounded-lg text-white/80 hover:bg-white/5 hover:text-white hover:pl-6 transition-all duration-300 flex items-center justify-between"
           >
-            Cart
+            <span>Cart</span>
             {isLoggedIn && cartCount > 0 && (
-              <span className="absolute -top-2 -right-3 bg-red-500 text-white text-xs w-5 h-5 rounded-full flex items-center justify-center animate-pulse">
+              <span className="bg-red-500 text-white text-xs w-6 h-6 rounded-full flex items-center justify-center animate-pulse">
                 {cartCount}
               </span>
             )}
           </button>
 
+          {/* Divider */}
+          <div className="my-3 border-t border-white/10"></div>
+
+          {/* User Section */}
           {isLoggedIn ? (
-            <>
+            <div className="flex flex-col gap-1">
               <button
-                onClick={() => { navigate("/profile"); setIsOpen(false); }}
-                className="text-lg text-white"
+                onClick={() => {
+                  navigate("/orders");
+                  setIsOpen(false);
+                }}
+                className="text-base py-3 px-4 rounded-lg text-white/80 hover:bg-white/5 hover:text-white hover:pl-6 transition-all duration-300 text-left"
+              >
+                My Orders
+              </button>
+              <button
+                onClick={() => {
+                  navigate("/profile");
+                  setIsOpen(false);
+                }}
+                className="text-base py-3 px-4 rounded-lg text-white/80 hover:bg-white/5 hover:text-white hover:pl-6 transition-all duration-300 text-left"
               >
                 Profile
               </button>
               <button
-                onClick={() => { handleLogout(); setIsOpen(false); }}
-                className="text-lg text-red-400"
+                onClick={() => {
+                  handleLogout();
+                  setIsOpen(false);
+                }}
+                className="text-base py-3 px-4 rounded-lg text-red-400 hover:bg-red-500/10 hover:text-red-300 hover:pl-6 transition-all duration-300 text-left mt-2"
               >
                 Logout
               </button>
-            </>
+            </div>
           ) : (
             <Link
               to="/auth"
               onClick={() => setIsOpen(false)}
-              className="text-lg text-blue-400"
+              className="text-base py-3 px-6 rounded-full text-center bg-gradient-to-r from-primary to-secondary text-black font-semibold hover:opacity-90 transition-all duration-300 hover:scale-105"
             >
               Login / Signup
             </Link>
           )}
+        </div>
+
+        {/* Footer */}
+        <div className="px-6 py-4 border-t border-white/10"
+          style={{
+            background: "linear-gradient(135deg, rgba(237, 204, 91, 0.05), rgba(241, 178, 35, 0.02))",
+          }}>
+          <p className="text-white/50 text-xs text-center">
+            © 2025 Dots&Decimals Infotech
+          </p>
         </div>
       </Drawer>
 
