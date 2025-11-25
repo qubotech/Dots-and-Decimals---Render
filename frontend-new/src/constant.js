@@ -66,12 +66,11 @@ export {
   aboutUsPageImg,
   logoImg1
 };
-//refresh
 // company details
 export const companyDetails = {
   phone: "+918807165290",
   tel: "+919003635437", // Ensure this value is defined and correct
-  email: "dotsndecimalsinfotech@gmail.com",
+  email: "info@dotsndecimalsinfotech.com",
   address: "S.F.NO758/2 759/2A, SITE No.86,87, Kovai Thiru Nagar, CBE, Civil Aerodrome Post, Kalapatti, Coimbatore, Tamil Nadu - 641014",
   facebook: "https://www.facebook.com/people/Dotsdecimals-infotech/61582304906895/?rdid=yY4cd24kYFUVoXQv&share_url=https%3A%2F%2Fwww.facebook.com%2Fshare%2F17iErDkJvW%2F",
   linkedin: "https://www.linkedin.com/company/dots-decimalsinfotech/",

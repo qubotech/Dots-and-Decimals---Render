@@ -51,10 +51,24 @@ const ProductList = () => {
         return (
             <>
                 <Banner page="Products" />
-                <div className="py-[5rem] bg-[#101010] text-white">
+                <div className="py-8 md:py-16 lg:py-20 bg-[#101010] text-white">
                     <div className="wrapper flex flex-col text-center gap-5 items-center">
                         <div className="gradient-rounded-text-box mb-2">Our Products</div>
-                        <h2 className="heading-2 max-w-[50rem]">Loading Products...</h2>
+                        <h2 className="heading-2 max-w-[50rem] px-4">Loading Products...</h2>
+
+                        {/* Skeleton Loading */}
+                        <div className="grid sm:grid-cols-2 md:grid-cols-3 gap-5 mt-8 w-full">
+                            {[1, 2, 3, 4, 5, 6].map((i) => (
+                                <div key={i} className="rounded-lg p-[1px] bg-gradient-to-r from-secondary to-primary">
+                                    <div className="rounded-lg bg-[#101010] p-5 h-80 animate-pulse">
+                                        <div className="bg-gray-700 h-32 w-32 mx-auto rounded mb-4"></div>
+                                        <div className="bg-gray-700 h-6 w-3/4 mx-auto rounded mb-2"></div>
+                                        <div className="bg-gray-700 h-4 w-full rounded mb-2"></div>
+                                        <div className="bg-gray-700 h-8 w-24 mx-auto rounded mt-4"></div>
+                                    </div>
+                                </div>
+                            ))}
+                        </div>
                     </div>
                 </div>
             </>
@@ -66,13 +80,13 @@ const ProductList = () => {
             <Toaster position="top-center" reverseOrder={false} />
             <Banner page="Products" />
 
-            <div className="py-[5rem] bg-[#101010] text-white">
+            <div className="py-8 md:py-16 lg:py-20 bg-[#101010] text-white">
                 <div className="wrapper flex flex-col text-center gap-5 items-center">
                     <div className="gradient-rounded-text-box mb-2">Our Products</div>
-                    <h2 className="heading-2 max-w-[50rem]">
+                    <h2 className="heading-2 max-w-[50rem] px-4">
                         Explore Our Wide Range of Products
                     </h2>
-                    <p className="desc max-w-[50rem]">
+                    <p className="desc max-w-[50rem] px-4">
                         Check out our top-quality products, designed to meet your digital needs.
                         Click "View Details" to see detailed features and specifications.
                     </p>
@@ -96,6 +110,7 @@ const ProductList = () => {
                                                 src={product.image}
                                                 alt={product.name}
                                                 className="w-32 h-32 object-contain transition duration-300 hover:scale-105"
+                                                loading="lazy"
                                             />
                                         </div>
                                         <div className="flex flex-col gap-2">

@@ -55,24 +55,24 @@ const ProfilePage = () => {
   const handleSave = async () => {
     // 🧩 Step 1: Validate profile fields
     if (!user.name || !user.email) {
-      return toast.error("Please fill name and email");
+      return toast.error("Please fill out your name and email to proceed");
     }
 
-    // 🧩 Step 2: Validate address fields
+    // 🧩 Step 2: Validate address fields with specific messages
     if (!form.street.trim()) {
-      return toast.error("Street field is required");
+      return toast.error("Please fill out the street address to proceed");
     }
     if (!form.pincode.trim()) {
-      return toast.error("Pincode field is required");
-    }
-    if (!form.phone.trim()) {
-      return toast.error("Phone number is required");
+      return toast.error("Please fill out the pincode to proceed");
     }
     if (pinError) {
-      return toast.error("Only Coimbatore pincodes allowed");
+      return toast.error("Only Coimbatore pincodes (641XXX) are allowed. Please update the pincode to proceed");
+    }
+    if (!form.phone.trim()) {
+      return toast.error("Please fill out the phone number to proceed");
     }
     if (!/^\d{10}$/.test(form.phone)) {
-      return toast.error("Enter a valid 10-digit phone number");
+      return toast.error("Please enter a valid 10-digit phone number to proceed");
     }
 
     // ✅ If all validation passed
@@ -82,17 +82,17 @@ const ProfilePage = () => {
       // 🧩 Step 3: Update user profile
       await API.put("/profile", user, headers);
       localStorage.setItem("userName", user.name);
-      localStorage.setItem("userEmail", user.email);
-      toast.success("Profile updated");
+      localStorage.setItem("userName", user.email);
+      toast.success("Profile updated successfully");
 
       // 🧩 Step 4: Add or update address
       let res;
       if (editId) {
         res = await API.put(`/profile/addresses/${editId}`, form, headers);
-        toast.success("Address updated");
+        toast.success("Address updated successfully");
       } else {
         res = await API.post("/profile/addresses", form, headers);
-        toast.success("Address added");
+        toast.success("Address added successfully");
       }
 
       setAddresses(res.data.addresses || []);
