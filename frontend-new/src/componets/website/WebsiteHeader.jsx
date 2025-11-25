@@ -194,7 +194,7 @@ const WebsiteHeader = () => {
         open={isOpen}
         onClose={toggleDrawer}
         direction="left"
-        className="fixed top-0 left-0 h-full w-72 z-50"
+        className="fixed top-0 left-0 h-full w-72 z-50 flex flex-col"
         style={{
           background: "linear-gradient(135deg, rgba(20, 20, 20, 0.98), rgba(40, 40, 40, 0.95))",
           backdropFilter: "blur(20px)",
@@ -225,8 +225,8 @@ const WebsiteHeader = () => {
                 key={path}
                 onClick={() => setIsOpen(false)}
                 className={`text-base py-3 px-4 rounded-lg transition-all duration-300 ${pathname === path
-                    ? "bg-gradient-to-r from-primary/20 to-secondary/20 text-primary font-semibold border-l-4 border-primary"
-                    : "text-white/80 hover:bg-white/5 hover:text-white hover:pl-6"
+                  ? "bg-gradient-to-r from-primary/20 to-secondary/20 text-primary font-semibold border-l-4 border-primary"
+                  : "text-white/80 hover:bg-white/5 hover:text-white hover:pl-6"
                   }`}
               >
                 {name}
@@ -250,7 +250,7 @@ const WebsiteHeader = () => {
           </button>
 
           {/* Divider */}
-          <div className="my-3 border-t border-white/10"></div>
+          <div className="my-2 border-t border-white/10"></div>
 
           {/* User Section */}
           {isLoggedIn ? (
@@ -278,7 +278,7 @@ const WebsiteHeader = () => {
                   handleLogout();
                   setIsOpen(false);
                 }}
-                className="text-base py-3 px-4 rounded-lg text-red-400 hover:bg-red-500/10 hover:text-red-300 hover:pl-6 transition-all duration-300 text-left mt-2"
+                className="text-base py-3 px-4 rounded-lg text-red-400 hover:bg-red-500/10 hover:text-red-300 hover:pl-6 transition-all duration-300 text-left"
               >
                 Logout
               </button>
@@ -292,16 +292,13 @@ const WebsiteHeader = () => {
               Login / Signup
             </Link>
           )}
-        </div>
 
-        {/* Footer */}
-        <div className="px-6 py-4 border-t border-white/10"
-          style={{
-            background: "linear-gradient(135deg, rgba(237, 204, 91, 0.05), rgba(241, 178, 35, 0.02))",
-          }}>
-          <p className="text-white/50 text-xs text-center">
-            © 2025 Dots&Decimals Infotech
-          </p>
+          {/* Footer */}
+          <div className="mt-6 pt-4 border-t border-white/10">
+            <p className="text-white/50 text-xs text-center">
+              © 2025 Dots&Decimals Infotech
+            </p>
+          </div>
         </div>
       </Drawer>
 
