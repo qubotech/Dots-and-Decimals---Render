@@ -52,10 +52,10 @@ export default function Certificate() {
       </div>
 
       {/* Certificate Section */}
-      <div className="bg-gradient-to-br from-slate-800 via-slate-900 to-slate-800 py-4 md:py-6 lg:py-8 px-4 md:px-8 w-[95%] mx-auto rounded-3xl border-2 border-[#585741] mb-8 md:mb-12">
-        <div className="max-w-7xl mx-auto">
+      <div className="bg-gradient-to-br from-slate-800 via-slate-900 to-slate-800 py-4 md:py-6 lg:py-8 px-4 md:px-8 w-[95%] md:w-[85%] lg:w-[75%] max-w-4xl mx-auto rounded-3xl border-2 border-[#585741] mb-8 md:mb-12">
+        <div className="w-full mx-auto">
           {/* Certificate Container */}
-          <div className="bg-[#17202E] p-2 md:p-8 lg:p-12 border-2 border-dashed border-[#585741] shadow-2xl rounded-2xl">
+          <div className="bg-[#17202E] p-2 md:p-6 lg:p-8 border-2 border-dashed border-[#585741] shadow-2xl rounded-2xl">
             <div
               className="rounded-xl overflow-hidden shadow-2xl md:cursor-default cursor-pointer"
               onClick={() => setIsModalOpen(true)}
