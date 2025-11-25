@@ -1,29 +1,26 @@
 import React from "react";
-import { appDevelopmentServices, webDevelopmentServices } from "../../constant";
 import { developmentServiceDetails } from "../../data/servicesPageDetalls";
 
 const LandingServices = ({ page }) => {
-  const services =
-    page === "web-development"
-      ? webDevelopmentServices
-      : appDevelopmentServices;
-
   const service = developmentServiceDetails.find((item) => item.type === page);
-  const isOddCount = service?.services?.length % 2 !== 0;
-  const lastItem = services[services.length - 1];
+
+  // Safety check - if service not found, don't render
+  if (!service || !service.services || service.services.length === 0) {
+    console.error(`Service not found for page: ${page}`);
+    return null;
+  }
+
+  const isOddCount = service.services.length % 2 !== 0;
+  const lastItem = service.services[service.services.length - 1];
 
   return (
     <div id="services" className="flex justify-center relative bg-[#101010]">
       <div className="wrapper py-16 flex flex-col items-center gap-5 z-10 text-white">
         <div data-aos="fade-up" className="gradient-rounded-text-box mx-auto">
-          {/* {page === "web-development" ? "Web Solutions" : "Mobile Solutions"} */}
           {service.title}
         </div>
 
         <h1 data-aos="fade-up" className="heading-2 text-center max-w-3xl mx-auto px-4">
-          {/* {page === "web-development"
-            ? "Transform Your Digital Presence With Cutting-Edge Web Solutions"
-            : "Powerful Mobile Experiences That Drive Engagement And Growth"} */}
           {service.tagline}
         </h1>
 
@@ -31,15 +28,12 @@ const LandingServices = ({ page }) => {
           data-aos="fade-up"
           className="text-center max-w-2xl mx-auto desc text-white/80 px-4"
         >
-          {/* {page === "web-development"
-            ? "We craft high-performance websites that combine stunning design with robust functionality to elevate your brand and drive conversions."
-            : "We develop intuitive, high-performance mobile applications that deliver seamless user experiences across all platforms and devices."} */}
           {service.description}
         </p>
 
         <div
           data-aos="fade-up"
-          className={`grid grid-cols-1 sm:grid-cols-2 gap-6 sm:gap-8 py-8 w-full max-w-6xl mx-auto`}
+          className="grid grid-cols-1 sm:grid-cols-2 gap-6 sm:gap-8 py-8 w-full max-w-6xl mx-auto"
         >
           {service.services.map((item) => (
             <div
