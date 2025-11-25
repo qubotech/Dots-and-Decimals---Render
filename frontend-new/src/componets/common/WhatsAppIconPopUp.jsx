@@ -4,31 +4,36 @@ import { Link, useNavigate } from "react-router-dom";
 import { companyDetails } from "../../constant";
 
 const WhatsAppIconPopUp = () => {
-  const [isPopupVisible, setPopupVisible] = useState(false);
-  const [isChatBoxVisible, setChatBoxVisible] = useState(false);
-  const navigate = useNavigate();
+  // ⚠️ COMMENTED FOR FUTURE USE - Popup and Chat Box Feature
+  // const [isPopupVisible, setPopupVisible] = useState(false);
+  // const [isChatBoxVisible, setChatBoxVisible] = useState(false);
+  // const navigate = useNavigate();
 
-  const togglePopup = () => {
-    setPopupVisible(!isPopupVisible);
-  };
+  // const togglePopup = () => {
+  //   setPopupVisible(!isPopupVisible);
+  // };
 
-  const toggleChatBox = () => {
-    setChatBoxVisible(!isChatBoxVisible);
-  };
+  // const toggleChatBox = () => {
+  //   setChatBoxVisible(!isChatBoxVisible);
+  // };
 
   return (
     <div className="fixed bottom-[2.5rem] right-[1.5rem] z-30">
-      {/* Main Button */}
-      <button
-        className="p-1 hover:-translate-y-1 border bg-green-500 border-white-500 rounded-full transition-all duration-200"
-        onClick={togglePopup}
-        aria-label="Open chat options"
+      {/* Direct WhatsApp Button */}
+      <Link
+        to={companyDetails.whatsapp}
+        target="_blank"
+        rel="noopener noreferrer"
+        aria-label="Contact us on WhatsApp"
+        className="block p-1 hover:-translate-y-1 border bg-green-500 border-white-500 rounded-full transition-all duration-200"
       >
-        <BsChatDots className="w-[2.5rem] scale-95 h-[2.5rem] sm:w-[3rem] sm:h-[3rem] p-1 fill-white hover:scale-110 rounded-full shadow-transparent shadow-large hover:shadow-primary/50 transition-all duration-300" />
-      </button>
+        <BsWhatsapp className="w-[2.5rem] scale-95 h-[2.5rem] sm:w-[3rem] sm:h-[3rem] p-1 fill-white hover:scale-110 rounded-full shadow-transparent shadow-large hover:shadow-primary/50 transition-all duration-300" />
+      </Link>
 
-      {/* Popup Options */}
-      {isPopupVisible && (
+      {/* ==================== COMMENTED FOR FUTURE USE ==================== */}
+
+      {/* POPUP OPTIONS - Uncomment when needed */}
+      {/* {isPopupVisible && (
         <div
           className="absolute bottom-[4.5rem] right-0 bg-white/30 backdrop-blur-md shadow-lg rounded-lg p-3 border border-white/20 w-[12rem]"
         >
@@ -56,14 +61,13 @@ const WhatsAppIconPopUp = () => {
             </li>
           </ul>
         </div>
-      )}
+      )} */}
 
-      {/* Chat Box Popup */}
-      {isChatBoxVisible && (
+      {/* CHAT BOX POPUP - Uncomment when needed */}
+      {/* {isChatBoxVisible && (
         <div
           className="fixed bottom-[2.5rem] right-[1.5rem] bg-white shadow-lg rounded-lg w-[20rem] h-[25rem] border border-gray-300 flex flex-col"
         >
-          {/* Header */}
           <div className="bg-yellow-500 text-white p-3 rounded-t-lg flex justify-between items-center">
             <span>Have a question? Ask us!</span>
             <button
@@ -74,11 +78,9 @@ const WhatsAppIconPopUp = () => {
               ✖
             </button>
           </div>
-          {/* Chat Content */}
           <div className="flex-1 p-3 overflow-y-auto">
             <p className="text-gray-700">Your message...</p>
           </div>
-          {/* Input Area */}
           <div className="p-3 border-t border-gray-300 flex items-center">
             <input
               type="text"
@@ -90,7 +92,9 @@ const WhatsAppIconPopUp = () => {
             </button>
           </div>
         </div>
-      )}
+      )} */}
+
+      {/* ==================== END OF COMMENTED CODE ==================== */}
     </div>
   );
 };
