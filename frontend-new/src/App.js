@@ -44,6 +44,7 @@ export default function App() {
           {/* Website Pages */}
           {routes.map(({ component, name, path }, index) => (
             <Route
+              key={`route-${path}`}
               path={path}
               element={
                 <>
@@ -81,6 +82,7 @@ export default function App() {
           />
           {landingPageContent.map((obj) => (
             <Route
+              key={`landing-${obj.id}`}
               path={`/${obj.id}`}
               element={
                 <>
