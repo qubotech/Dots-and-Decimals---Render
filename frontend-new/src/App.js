@@ -2,11 +2,9 @@ import { Route, Routes } from "react-router-dom";
 import AOS from "aos";
 import "aos/dist/aos.css";
 import { LandingPage } from "./pages/landingPages/LandingPage";
-import LandingHeader from "./componets/landingPages/LandingHeader";
-import LandingFooter from "./componets/landingPages/LandingFooter";
 import WebsiteHeader from "./componets/website/WebsiteHeader";
 import WebsiteFooter from "./componets/website/WebsiteFooter";
-import { routes } from "./constant";
+import { routes, QuickLinks } from "./constant";
 import { lazy, Suspense } from "react";
 import { LoadingSpinner } from "./componets/common/LoadingSpinner";
 import SpinnerContextProvider, {
@@ -14,24 +12,26 @@ import SpinnerContextProvider, {
 } from "./componets/SpinnerContext";
 import ScrollToTop from "./componets/common/ScrollToTop";
 import WhatsAppIconPopUp from "./componets/common/WhatsAppIconPopUp";
-import {
-  developmentServiceDetails,
-  landingPageContent,
-} from "./data/servicesPageDetalls";
-import ProductDetail from "./pages/website/ProductDetail";
-import Cart from "./pages/website/Cart";
-import Orders from "./pages/website/Orders";
+import { landingPageContent } from "./data/servicesPageDetalls";
 import { Toaster } from "react-hot-toast";
-import ProfilePage from "./pages/website/ProfilePage";
-import { QuickLinks } from "./constant";
 
+// Lazy load e-commerce and user pages
+const ProductDetail = lazy(() => import("./pages/website/ProductDetail"));
+const Cart = lazy(() => import("./pages/website/Cart"));
+const Orders = lazy(() => import("./pages/website/Orders"));
+const ProfilePage = lazy(() => import("./pages/website/ProfilePage"));
 const Thankyou = lazy(() => import("./pages/Thankyou"));
 
+// Initialize AOS with performance optimizations
+if (typeof window !== 'undefined' && window.innerWidth > 768) {
+  AOS.init({
+    once: true,
+    duration: 500,
+    offset: 120,
+    disable: 'mobile', // Disable on mobile for better performance
+  });
+}
 
-AOS.init({
-  once: true,
-  duration: 500,
-});
 export default function App() {
   return (
     <SpinnerContextProvider>

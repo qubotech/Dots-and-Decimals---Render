@@ -1,29 +1,31 @@
-import React from "react";
+import React, { lazy, Suspense } from "react";
 import { Link } from "react-router-dom";
-import Contact from "../../componets/landingPages/Contact";
 import aboutUsImg from "../../assets/images/landing-aboutus.png";
-import WhyChooseUs from "../../componets/common/WhyChooseUs";
-import ReactPlayer from "react-player";
 import { homeBannerVideo } from "../../constant";
 import OurServices from "../../componets/website/OurServices";
-import EndlessOpportunitiesSection from "../../componets/common/EndlessOpportunitiesSection";
-import UnlockEfficiency from "../../componets/common/UnlockEfficiency";
-import Certificate from "../../componets/common/Certificate"; // Add this import
+
+// Lazy load heavy components for better performance
+const Contact = lazy(() => import("../../componets/landingPages/Contact"));
+const WhyChooseUs = lazy(() => import("../../componets/common/WhyChooseUs"));
+const Certificate = lazy(() => import("../../componets/common/Certificate"));
+const EndlessOpportunitiesSection = lazy(() => import("../../componets/common/EndlessOpportunitiesSection"));
+const UnlockEfficiency = lazy(() => import("../../componets/common/UnlockEfficiency"));
 
 const Home = () => {
   return (
     <>
-      <div id="banner" className="h-screen relative">
-        <ReactPlayer
-          url={homeBannerVideo}
+      <div id="banner" className="h-screen relative overflow-hidden">
+        <video
+          autoPlay
           loop
           muted
-          width="100%"
-          height="100%"
-          playsinline
-          playing
-          className="absolute"
-        />
+          playsInline
+          className="absolute w-full h-full object-cover"
+          preload="metadata"
+        >
+          <source src={homeBannerVideo} type="video/mp4" />
+          Your browser does not support the video tag.
+        </video>
         <div className="bg-gradient-to-r to-black/50 from-transparent absolute w-full h-full"></div>
         <div className="pt-[7rem] sm:pt-[3rem] wrapper flex items-center h-full">
           <div
@@ -91,8 +93,10 @@ const Home = () => {
         </div>
       </section>
 
-      {/* Certificate Component - Added here */}
-      <Certificate />
+      {/* Certificate Component - Lazy loaded */}
+      <Suspense fallback={<div className="h-20 bg-black"></div>}>
+        <Certificate />
+      </Suspense>
 
       <OurServices length={3} />
       <section className="py-[5rem] bg-black text-white">
@@ -119,10 +123,21 @@ const Home = () => {
       </section>
 
       {/* <Faqs /> */}
-      <WhyChooseUs />
-      <UnlockEfficiency />
-      <EndlessOpportunitiesSection />
-      <Contact />
+      <Suspense fallback={<div className="h-20 bg-black"></div>}>
+        <WhyChooseUs />
+      </Suspense>
+
+      <Suspense fallback={<div className="h-20 bg-black"></div>}>
+        <UnlockEfficiency />
+      </Suspense>
+
+      <Suspense fallback={<div className="h-20 bg-black"></div>}>
+        <EndlessOpportunitiesSection />
+      </Suspense>
+
+      <Suspense fallback={<div className="h-20 bg-black"></div>}>
+        <Contact />
+      </Suspense>
     </>
   );
 };
