@@ -15,16 +15,16 @@ const Home = () => {
   return (
     <>
       <div id="banner" className="h-screen relative overflow-hidden">
+        {/* Background video */}
         <video
           autoPlay
           loop
           muted
           playsInline
           className="absolute w-full h-full object-cover"
-          preload="metadata"
+          preload="auto"
         >
           <source src={homeBannerVideo} type="video/mp4" />
-          Your browser does not support the video tag.
         </video>
         <div className="bg-gradient-to-r to-black/50 from-transparent absolute w-full h-full"></div>
         <div className="pt-[7rem] sm:pt-[3rem] wrapper flex items-center h-full">

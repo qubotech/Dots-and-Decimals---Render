@@ -22,15 +22,14 @@ const Orders = lazy(() => import("./pages/website/Orders"));
 const ProfilePage = lazy(() => import("./pages/website/ProfilePage"));
 const Thankyou = lazy(() => import("./pages/Thankyou"));
 
-// Initialize AOS with performance optimizations
-if (typeof window !== 'undefined' && window.innerWidth > 768) {
-  AOS.init({
-    once: true,
-    duration: 500,
-    offset: 120,
-    disable: 'mobile', // Disable on mobile for better performance
-  });
-}
+// Initialize AOS - works on all devices but optimized
+AOS.init({
+  once: true,
+  duration: window.innerWidth > 768 ? 500 : 300, // Faster on mobile
+  offset: window.innerWidth > 768 ? 120 : 50, // Smaller offset on mobile
+  delay: 0,
+  easing: 'ease-out',
+});
 
 export default function App() {
   return (
