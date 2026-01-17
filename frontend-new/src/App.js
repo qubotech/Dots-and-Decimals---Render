@@ -2,31 +2,43 @@ import { Route, Routes } from "react-router-dom";
 import AOS from "aos";
 import "aos/dist/aos.css";
 import { LandingPage } from "./pages/landingPages/LandingPage";
-import LandingHeader from "./componets/landingPages/LandingHeader";
-import LandingFooter from "./componets/landingPages/LandingFooter";
 import WebsiteHeader from "./componets/website/WebsiteHeader";
 import WebsiteFooter from "./componets/website/WebsiteFooter";
+<<<<<<< HEAD
 import { routes } from "./constant";
 import { lazy, Suspense, useEffect } from "react";
+=======
+import { routes, QuickLinks } from "./constant";
+import { lazy, Suspense } from "react";
+>>>>>>> 1e65359c7e6f4153dd1b337a61b4ead123460458
 import { LoadingSpinner } from "./componets/common/LoadingSpinner";
 import SpinnerContextProvider, {
   LoadingSpinnerContext,
 } from "./componets/SpinnerContext";
 import ScrollToTop from "./componets/common/ScrollToTop";
 import WhatsAppIconPopUp from "./componets/common/WhatsAppIconPopUp";
-import {
-  developmentServiceDetails,
-  landingPageContent,
-} from "./data/servicesPageDetalls";
-import ProductDetail from "./pages/website/ProductDetail";
-import Cart from "./pages/website/Cart";
-import Orders from "./pages/website/Orders";
+import { landingPageContent } from "./data/servicesPageDetalls";
 import { Toaster } from "react-hot-toast";
-import ProfilePage from "./pages/website/ProfilePage";
-import { QuickLinks } from "./constant";
 
+// Lazy load e-commerce and user pages
+const ProductDetail = lazy(() => import("./pages/website/ProductDetail"));
+const Cart = lazy(() => import("./pages/website/Cart"));
+const Orders = lazy(() => import("./pages/website/Orders"));
+const ProfilePage = lazy(() => import("./pages/website/ProfilePage"));
 const Thankyou = lazy(() => import("./pages/Thankyou"));
 
+<<<<<<< HEAD
+=======
+// Initialize AOS - works on all devices but optimized
+AOS.init({
+  once: true,
+  duration: window.innerWidth > 768 ? 500 : 300, // Faster on mobile
+  offset: window.innerWidth > 768 ? 120 : 50, // Smaller offset on mobile
+  delay: 0,
+  easing: 'ease-out',
+});
+
+>>>>>>> 1e65359c7e6f4153dd1b337a61b4ead123460458
 export default function App() {
   // Defer AOS initialization to avoid blocking render
   useEffect(() => {
@@ -46,7 +58,11 @@ export default function App() {
           {/* Website Pages */}
           {routes.map(({ component, name, path }, index) => (
             <Route
+<<<<<<< HEAD
               key={`route-${path}-${index}`}
+=======
+              key={`route-${path}`}
+>>>>>>> 1e65359c7e6f4153dd1b337a61b4ead123460458
               path={path}
               element={
                 <>

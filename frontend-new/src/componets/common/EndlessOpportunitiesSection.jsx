@@ -9,28 +9,14 @@ import gsap from "gsap";
 const EndlessOpportunitiesSection = () => {
   useEffect(() => {
     const tl = gsap.timeline();
-    tl.to("#to-bottom", {
-      y: -200,
+    // Only animate elements that exist in the DOM
+    tl.to("#from-right", {
+      x: -300,
       yoyo: true,
       repeat: -1,
       duration: 1,
       ease: "back.inOut",
     })
-      .to("#to-top", {
-        y: 200,
-        yoyo: true,
-        repeat: -1,
-        duration: 1,
-        ease: "back.inOut",
-        delay: 0.5,
-      })
-      .to("#from-right", {
-        x: -300,
-        yoyo: true,
-        repeat: -1,
-        duration: 1,
-        ease: "back.inOut",
-      })
       .to("#from-left", {
         x: 300,
         yoyo: true,

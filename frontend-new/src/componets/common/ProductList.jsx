@@ -108,13 +108,16 @@ const ProductList = () => {
                 setProducts([]);
             }
         } catch (error) {
-            console.error("Error fetching products:", error);
-            if (error.name === 'AbortError') {
-                toast.error('Request timed out. Please check your connection.');
-            } else if (error.code === 'ECONNABORTED') {
-                toast.error('Connection timeout. Please try again.');
-            } else {
-                toast.error('Failed to load products. Please refresh.');
+            // Don't log or show errors for canceled requests (component unmount)
+            if (error.code !== 'ERR_CANCELED') {
+                console.error("Error fetching products:", error);
+                if (error.name === 'AbortError') {
+                    toast.error('Request timed out. Please check your connection.');
+                } else if (error.code === 'ECONNABORTED') {
+                    toast.error('Connection timeout. Please try again.');
+                } else {
+                    toast.error('Failed to load products. Please refresh.');
+                }
             }
             setProducts([]);
         } finally {
