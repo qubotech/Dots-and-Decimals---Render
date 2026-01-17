@@ -17,11 +17,48 @@ services:
       - key: PORT
         value: 10000
 
-  # Frontend (if you want to deploy it separately)
+  # Frontend Static Site
   - type: web
     name: dots-decimals-frontend
     env: static
     region: oregon
     rootDir: frontend-new
     buildCommand: npm install && npm run build
-    staticPublishPath: ./dist
+    staticPublishPath: ./build
+    headers:
+      # Cache static assets for 1 year
+      - path: /static/*
+        name: Cache-Control
+        value: public, max-age=31536000, immutable
+      # Cache images for 1 month
+      - path: /*.jpg
+        name: Cache-Control
+        value: public, max-age=2592000
+      - path: /*.png
+        name: Cache-Control
+        value: public, max-age=2592000
+      - path: /*.webp
+        name: Cache-Control
+        value: public, max-age=2592000
+      - path: /*.svg
+        name: Cache-Control
+        value: public, max-age=2592000
+      # Don't cache HTML - always fresh
+      - path: /*.html
+        name: Cache-Control
+        value: public, max-age=0, must-revalidate
+      # Security headers
+      - path: /*
+        name: X-Content-Type-Options
+        value: nosniff
+      - path: /*
+        name: X-Frame-Options
+        value: SAMEORIGIN
+      - path: /*
+        name: Referrer-Policy
+        value: strict-origin-when-cross-origin
+    routes:
+      - type: rewrite
+        source: /*
+        destination: /index.html
+
