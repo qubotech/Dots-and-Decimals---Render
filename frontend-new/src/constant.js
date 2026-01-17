@@ -32,13 +32,14 @@ import { ReactComponent as FlutterIcon } from "./assets/svgs/flutterdevelopment.
 import { ReactComponent as HybridAppIcon } from "./assets/svgs/hybridappdevelopment.svg";
 
 import { lazy } from "react";
-import ProductList from "./componets/common/ProductList";
-import AuthPage from "./componets/common/AuthPage";
-import PrivacyPolicy from "./pages/website/PrivacyPolicy";
+// Lazy load ALL page components for better performance
 const Home = lazy(() => import("./pages/website/Home"));
 const Services = lazy(() => import("./pages/website/Services"));
 const ContactUs = lazy(() => import("./pages/website/ContactUs"));
 const AboutUs = lazy(() => import("./pages/website/AboutUs"));
+const ProductList = lazy(() => import("./componets/common/ProductList"));
+const AuthPage = lazy(() => import("./componets/common/AuthPage"));
+const PrivacyPolicy = lazy(() => import("./pages/website/PrivacyPolicy"));
 
 export {
   logoImg,

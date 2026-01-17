@@ -33,7 +33,14 @@ const WebsiteHeader = () => {
   useEffect(() => {
     const token = localStorage.getItem("token");
     setIsLoggedIn(!!token);
-    fetchCartCount();
+
+    // Only fetch cart count if we don't have a cached value
+    const cachedCount = sessionStorage.getItem("cartCount");
+    if (cachedCount !== null) {
+      setCartCount(parseInt(cachedCount, 10));
+    } else if (token) {
+      fetchCartCount();
+    }
   }, []);
 
   const getAuthHeaders = () => {
@@ -42,7 +49,7 @@ const WebsiteHeader = () => {
     return { headers: { Authorization: `Bearer ${token}` } };
   };
 
-  // ✅ Fetch cart count
+  // ✅ Fetch cart count with caching
   const fetchCartCount = async () => {
     const headers = getAuthHeaders();
     if (!headers) return; // No token, skip
@@ -50,6 +57,8 @@ const WebsiteHeader = () => {
       const res = await API.get("/cart", headers);
       const count = res.data.items.reduce((sum, item) => sum + item.quantity, 0);
       setCartCount(count);
+      // Cache the cart count
+      sessionStorage.setItem("cartCount", count.toString());
     } catch (error) {
       console.error("Error fetching cart count", error);
     }
@@ -59,7 +68,8 @@ const WebsiteHeader = () => {
     localStorage.removeItem("token");
     localStorage.removeItem("userEmail");
     localStorage.removeItem("userId");
-    localStorage.removeItem("userName")
+    localStorage.removeItem("userName");
+    sessionStorage.removeItem("cartCount"); // Clear cart cache
     setIsLoggedIn(false);
     setCartCount(0);
     setShowProfileMenu(false);
@@ -75,7 +85,10 @@ const WebsiteHeader = () => {
   };
 
   useEffect(() => {
-    const listener = () => fetchCartCount();
+    const listener = () => {
+      fetchCartCount();
+      sessionStorage.removeItem("cartCount"); // Clear cache to force refresh
+    };
     window.addEventListener("cartUpdated", listener);
     return () => window.removeEventListener("cartUpdated", listener);
   }, []);

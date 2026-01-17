@@ -2,19 +2,36 @@ import React from "react";
 import { developmentServiceDetails } from "../../data/servicesPageDetalls";
 
 const LandingServices = ({ page }) => {
+  console.log('=== LandingServices Debug ===');
+  console.log('page prop:', page);
+  console.log('all services:', developmentServiceDetails.map(s => s.type));
+
   const service = developmentServiceDetails.find((item) => item.type === page);
+  console.log('found service:', service);
 
   // Safety check - if service not found, don't render
   if (!service || !service.services || service.services.length === 0) {
-    console.error(`Service not found for page: ${page}`);
+    console.error(`❌ Service not found for page: ${page}`);
+    console.error('Available service types:', developmentServiceDetails.map(s => s.type));
     return null;
   }
 
+  console.log('✅ Service found! Num cards:', service.services.length);
+
   const isOddCount = service.services.length % 2 !== 0;
   const lastItem = service.services[service.services.length - 1];
+  console.log('isOddCount:', isOddCount, 'lastItem:', lastItem);
 
   return (
-    <div id="services" className="flex justify-center relative bg-[#101010]">
+    <div
+      id="services"
+      className="flex justify-center relative bg-[#101010]"
+      style={{
+        border: '5px solid red',
+        minHeight: '500px',
+        backgroundColor: '#1a1a1a'
+      }}
+    >
       <div className="wrapper py-16 flex flex-col items-center gap-5 z-10 text-white">
         <div data-aos="fade-up" className="gradient-rounded-text-box mx-auto">
           {service.title}

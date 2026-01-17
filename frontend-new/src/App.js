@@ -7,7 +7,7 @@ import LandingFooter from "./componets/landingPages/LandingFooter";
 import WebsiteHeader from "./componets/website/WebsiteHeader";
 import WebsiteFooter from "./componets/website/WebsiteFooter";
 import { routes } from "./constant";
-import { lazy, Suspense } from "react";
+import { lazy, Suspense, useEffect } from "react";
 import { LoadingSpinner } from "./componets/common/LoadingSpinner";
 import SpinnerContextProvider, {
   LoadingSpinnerContext,
@@ -27,12 +27,14 @@ import { QuickLinks } from "./constant";
 
 const Thankyou = lazy(() => import("./pages/Thankyou"));
 
-
-AOS.init({
-  once: true,
-  duration: 500,
-});
 export default function App() {
+  // Defer AOS initialization to avoid blocking render
+  useEffect(() => {
+    AOS.init({
+      once: true,
+      duration: 500,
+    });
+  }, []);
   return (
     <SpinnerContextProvider>
       <LoadingSpinnerContext />
@@ -44,6 +46,7 @@ export default function App() {
           {/* Website Pages */}
           {routes.map(({ component, name, path }, index) => (
             <Route
+              key={`route-${path}-${index}`}
               path={path}
               element={
                 <>
@@ -81,6 +84,7 @@ export default function App() {
           />
           {landingPageContent.map((obj) => (
             <Route
+              key={`landing-${obj.id}`}
               path={`/${obj.id}`}
               element={
                 <>
