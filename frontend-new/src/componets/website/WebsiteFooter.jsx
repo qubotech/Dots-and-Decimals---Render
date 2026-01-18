@@ -16,12 +16,13 @@ const WebsiteFooter = () => {
       <div className="wrapper text-white">
         <div className="flex md:flex-row flex-col justify-between gap-10">
           <div className="flex flex-col items-center">
-            <img src={logoImg} className="w-[12rem] mb-2" alt="logo" />
+            <img src={logoImg} width="192" height="192" className="w-[12rem] mb-2" alt="Dots and Decimals Infotech logo" loading="lazy" />
             <p className="desc md:max-w-[15rem] text-sm text-center">
               We have rapidly grown into a trusted partner for organizations
               seeking digital transformation, enhanced operational efficiency.
             </p>
           </div>
+
           <div className="flex md:flex-row flex-col gap-10">
             <div className="flex flex-col gap-2">
               <h6 className="font-medium mb-1">Quick Links</h6>
@@ -72,19 +73,19 @@ const WebsiteFooter = () => {
                 border: "1px solid rgba(255, 255, 255, 0.3)",
               }}
             >
-              <Link target="_blank" to={companyDetails.facebook}>
+              <Link target="_blank" to={companyDetails.facebook} aria-label="Visit our Facebook page">
                 <BsFacebook className="text-xl text-white/80 hover:text-primary transition-all duration-300" />
               </Link>
-              <Link target="_blank" to={companyDetails.x}>
+              <Link target="_blank" to={companyDetails.x} aria-label="Visit our X (Twitter) profile">
                 <RiTwitterXLine className="text-xl text-white/80 hover:text-primary transition-all duration-300" />
               </Link>
-              <Link target="_blank" to={companyDetails.linkedin}>
+              <Link target="_blank" to={companyDetails.linkedin} aria-label="Visit our LinkedIn page">
                 <BsLinkedin className="text-xl text-white/80 hover:text-primary transition-all duration-300" />
               </Link>
-              <Link target="_blank" to={companyDetails.threads}>
+              <Link target="_blank" to={companyDetails.threads} aria-label="Visit our Threads profile">
                 <BsThreadsFill className="text-xl text-white/80 hover:text-primary transition-all duration-300" />
               </Link>
-              <Link target="_blank" to={companyDetails.instagram}>
+              <Link target="_blank" to={companyDetails.instagram} aria-label="Visit our Instagram profile">
                 <RiInstagramFill
                   size={25}
                   className="text-xl text-white/80 hover:text-primary transition-all duration-300"

@@ -4,12 +4,20 @@ import { defaultBanner } from "../../constant";
 const Banner = ({ page }) => {
   return (
     <div data-aos="fade-down" className="h-[40vh] sm:h-[55vh] md:h-[70vh] relative">
-      <img src={defaultBanner} className="object-cover h-full w-full" alt="" />
+      <img
+        src={defaultBanner}
+        width="1920"
+        height="1080"
+        className="object-cover h-full w-full"
+        alt={`${page} page banner`}
+        loading="eager"
+      />
       <h2 className="font-raleway text-[2.18rem] md:text-7xl font-bold leading-tight text-white absolute left-1/2 top-1/2 -translate-x-1/2 -translate-y-[10%] text-center">
         {page}
       </h2>
     </div>
   );
+
 };
 
 export default Banner;

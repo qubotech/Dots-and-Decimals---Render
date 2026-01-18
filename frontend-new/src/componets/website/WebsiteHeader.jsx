@@ -108,10 +108,14 @@ const WebsiteHeader = () => {
         <Link to="/" className="relative">
           <img
             src={logoImg1}
+            width="56"
+            height="56"
             className="w-[3rem] sm:w-[3.5rem] scale-150" // Reduced size
-            alt="logo"
+            alt="Dots and Decimals logo"
+            loading="eager"
           />
         </Link>
+
 
         <div className="hidden sm:flex items-center gap-4 sm:gap-6">
           {routes
@@ -130,6 +134,7 @@ const WebsiteHeader = () => {
           {/* Cart Icon */}
           <button
             onClick={handleCartClick}
+            aria-label={`Shopping cart with ${cartCount} items`}
             className="relative text-xl sm:text-2xl hover:text-primary transition"
           >
             <FaShoppingCart />
@@ -140,10 +145,13 @@ const WebsiteHeader = () => {
             )}
           </button>
 
+
           {isLoggedIn ? (
             <div className="relative" ref={profileRef}>
               <button
                 onClick={() => setShowProfileMenu(!showProfileMenu)}
+                aria-label="User profile menu"
+                aria-expanded={showProfileMenu}
                 className="text-2xl hover:text-primary transition"
               >
                 <FaUserCircle />
@@ -156,6 +164,7 @@ const WebsiteHeader = () => {
                       navigate("/orders");
                       setShowProfileMenu(false);
                     }}
+                    aria-label="View my orders"
                     className="w-full text-left px-4 py-2 hover:bg-white/10 text-sm"
                   >
                     Orders
@@ -165,6 +174,7 @@ const WebsiteHeader = () => {
                       navigate("/profile");
                       setShowProfileMenu(false);
                     }}
+                    aria-label="View my profile"
                     className="w-full text-left px-4 py-2 hover:bg-white/10 text-sm"
                   >
                     Profile
@@ -174,6 +184,7 @@ const WebsiteHeader = () => {
                       handleLogout();
                       setShowProfileMenu(false);
                     }}
+                    aria-label="Logout from account"
                     className="w-full text-left px-4 py-2 text-red-400 hover:bg-white/10 text-sm"
                   >
                     Logout
@@ -219,9 +230,10 @@ const WebsiteHeader = () => {
           style={{
             background: "linear-gradient(135deg, rgba(237, 204, 91, 0.1), rgba(241, 178, 35, 0.05))",
           }}>
-          <img src={logoImg1} className="w-12 h-12" alt="logo" />
+          <img src={logoImg1} width="48" height="48" className="w-12 h-12" alt="Dots and Decimals logo" loading="lazy" />
           <button
             onClick={() => setIsOpen(false)}
+            aria-label="Close navigation menu"
             className="text-white text-2xl hover:text-primary transition-all duration-300 hover:rotate-90"
           >
             <IoMdClose />
@@ -252,6 +264,7 @@ const WebsiteHeader = () => {
               navigate("/cart");
               setIsOpen(false);
             }}
+            aria-label={`Shopping cart with ${cartCount} items`}
             className="text-base py-3 px-4 rounded-lg text-white/80 hover:bg-white/5 hover:text-white hover:pl-6 transition-all duration-300 flex items-center justify-between"
           >
             <span>Cart</span>
@@ -273,6 +286,7 @@ const WebsiteHeader = () => {
                   navigate("/orders");
                   setIsOpen(false);
                 }}
+                aria-label="View my orders"
                 className="text-base py-3 px-4 rounded-lg text-white/80 hover:bg-white/5 hover:text-white hover:pl-6 transition-all duration-300 text-left"
               >
                 My Orders
@@ -282,6 +296,7 @@ const WebsiteHeader = () => {
                   navigate("/profile");
                   setIsOpen(false);
                 }}
+                aria-label="View my profile"
                 className="text-base py-3 px-4 rounded-lg text-white/80 hover:bg-white/5 hover:text-white hover:pl-6 transition-all duration-300 text-left"
               >
                 Profile
@@ -291,6 +306,7 @@ const WebsiteHeader = () => {
                   handleLogout();
                   setIsOpen(false);
                 }}
+                aria-label="Logout from account"
                 className="text-base py-3 px-4 rounded-lg text-red-400 hover:bg-red-500/10 hover:text-red-300 hover:pl-6 transition-all duration-300 text-left"
               >
                 Logout
